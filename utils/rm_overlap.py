@@ -15,12 +15,15 @@ for line in sys.stdin:
 
     if len(links[(u,v)]) > 0:
         for (i,j) in links[(u,v)]:
-            if b >= i and b < j:
+            if b >= i and b <= j:
                 #C'est un overlap/une inclusion, on fait une modif
                 time = links[(u,v)].index((i,j))
                 links[(u,v)][time] = (min(b,i), max(j,e))
+                # print(links[(u,v)][time])
+                new = False
                 break
             else:
+                # print((i,j))
                 new = True #links[(u,v)].append((b,e))
 
         if new:
