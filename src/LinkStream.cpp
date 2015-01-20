@@ -29,6 +29,7 @@ Link::~Link() {}
 LinkStream::LinkStream(int _alpha, int _omega){
     this->alpha = _alpha;
     this->omega = _omega;
+    this->first_time = _alpha;
 }
 
 void LinkStream::append(Link l) {
@@ -43,6 +44,7 @@ void LinkStream::append(Link l) {
 }
 
 void LinkStream::pop() {
+    // this->first_time = this->stream[0].b;
     this->stream.pop_front();
 }
 

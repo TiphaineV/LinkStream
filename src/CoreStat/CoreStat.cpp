@@ -1,5 +1,6 @@
 #include "CoreStat.hpp"
 #include "../LinkStream.hpp"
+#include <cassert>
 
 Nodes::Nodes(int _alpha, int _omega) {
     this->alpha = _alpha;
@@ -60,24 +61,31 @@ void Edges::printStats() {
 int Links::getLinkTic(const LinkStream& stream, Link& l) {
 
     unsigned long i = 0;
+    int tic = 0;
+
     if(stream.stream.size() >= 2) {
         i = stream.stream.size() - 2; //Avoid l
     }
     else {
         // There is only one link in the stream
-        return l.b - stream.alpha;
+        tic = l.b - stream.first_time;
+        assert(tic >= 0 && "A");
+        return tic;
     }
 
-    while(i > 0 && (stream.stream[i].u != l.u || stream.stream[i].v != l.v)) {
+    while(i > 0 && (stream.stream[i].u != l.u || stream.stream[i].v != l.v || stream.stream[i].e < l.b)) {
         i--;
     }
 
     if(i == 0 && (stream.stream[0].u != l.u || stream.stream[0].v != l.v)) {
-
-        return l.b - stream.alpha;
+        tic = l.b - stream.first_time;
+        assert(tic >= 0 && "B");
+        return tic;
     }
     else {
-        return l.b - stream.stream[i].e;
+        tic = l.b - stream.stream[i].e;
+        assert(tic >= 0 && "C");
+        return tic;
     }
 }
 

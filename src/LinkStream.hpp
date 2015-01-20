@@ -41,6 +41,7 @@ class LinkStream {
 
     public:
         int alpha;
+        int first_time;
         int omega;
         std::deque<Link> stream;
         std::map<int, std::vector<int> > neighbors;
