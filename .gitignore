@@ -3,6 +3,8 @@ data/
 stats/
 .DS_Store
 
+main
+
 # Compiled Object files
 *.slo
 *.lo
