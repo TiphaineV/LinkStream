@@ -40,6 +40,7 @@ class Edges {
         static unsigned long totalNumberOfEdges(LinkStream stream);
         void updateOccurrences(std::pair<int,int>);
         void updateFrequencies(std::pair<int,int>, Link&);
+        int getAndUpdateLastSeen(Link& l);
         void printStats();
         // void updateDuration(std::pair<int,int>);
         //
@@ -49,7 +50,7 @@ class Edges {
     //
     public:
         int alpha, omega;
-    //     std::map<std::pair<int,int>, std::vector<int> > tic;
+        std::map<std::pair<int,int>, int> last_seen;
         std::map<std::pair<int,int>, int> frequencies;
     //     std::map<std::pair<int,int>, int> duration;
         std::map<std::pair<int,int>, int> occurrences;

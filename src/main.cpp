@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
             edge.second = u;
         }
 
-        stream.append(l);
+        // stream.append(l);
         eStat.updateOccurrences(edge);
         eStat.updateFrequencies(edge, l);
 
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
         nStat.updateFrequencies(u, v, l);
 
         // Print per-link statistics
-        std::cout << l << " " << l.e - l.b << " " << Links::getLinkTic(stream, l) << std::endl;
+        std::cout << l << " " << l.e - l.b << " " << eStat.getAndUpdateLastSeen(l) << std::endl;
     }
 
     // std::cout << "Number of nodes : " << Nodes::totalNumberOfNodes(stream) << std::endl;

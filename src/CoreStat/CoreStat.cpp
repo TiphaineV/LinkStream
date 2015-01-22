@@ -39,6 +39,19 @@ unsigned long Edges::totalNumberOfEdges(LinkStream stream) {
     return stream.edges.size();
 }
 
+int Edges::getAndUpdateLastSeen(Link& l) {
+    int lseen = -1;
+    std::pair<int,int> edge(l.u, l.v);
+
+    if(this->last_seen.count(edge) == 1) {
+        lseen = l.b - this->last_seen[edge];
+    }
+
+    this->last_seen[edge] = l.e;
+
+    return lseen;
+}
+
 void Edges::updateOccurrences(std::pair<int,int> edge) {
     this->occurrences[edge]++;
 }
