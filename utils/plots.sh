@@ -9,7 +9,7 @@ do
     cat 'stats/values/'$statfile |sort -n |uniq -c |awk '{print($2,$1)}' > stats/dists/$statfile-dist
 
     # Compute ccdf
-    cat stats/dists/$statfile-dist |sort -nk1,1 |awk '{t+=$2;print($1,t);}' > stats/dists/$statfile-ccdf
+    cat stats/dists/$statfile-dist |sort -nk1,1 -r |awk '{t+=$2;print($1,t);}' > stats/dists/$statfile-ccdf
     # Make plots (gnuplot ?)
 echo "
 set terminal postscript;
