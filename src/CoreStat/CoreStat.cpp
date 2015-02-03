@@ -11,19 +11,19 @@ unsigned long Nodes::totalNumberOfNodes(LinkStream stream) {
     return stream.neighbors.size();
 }
 
-void Nodes::updateOccurrences(int u, int v) {
+void Nodes::updateOccurrences(std::string u, std::string v) {
     this->occurrences[u]++;
     this->occurrences[v]++;
 }
 
-void Nodes::updateFrequencies(int u, int v, Link& l) {
+void Nodes::updateFrequencies(std::string u, std::string v, Link& l) {
     this->frequencies[u] += l.e - l.b;
     this->frequencies[v] += l.e - l.b;
 }
 
 void Nodes::printStats() {
-    std::map<int, int>::const_iterator occIter;
-    std::map<int, int>::const_iterator fIter;
+    std::map<std::string, int>::const_iterator occIter;
+    std::map<std::string, int>::const_iterator fIter;
 
     for(occIter = this->occurrences.begin(), fIter = this->frequencies.begin(); occIter != this->occurrences.end(); ++occIter, ++fIter) {
         std::cout << "* " << occIter->first << " " << occIter->second << " " << float(fIter->second) / float(this->omega - this->alpha) << std::endl;
@@ -41,7 +41,7 @@ unsigned long Edges::totalNumberOfEdges(LinkStream stream) {
 
 int Edges::getAndUpdateLastSeen(Link& l) {
     int lseen = -1;
-    std::pair<int,int> edge(l.u, l.v);
+    std::pair<std::string,std::string> edge(l.u, l.v);
 
     if(this->last_seen.count(edge) == 1) {
         lseen = l.b - this->last_seen[edge];
@@ -52,17 +52,17 @@ int Edges::getAndUpdateLastSeen(Link& l) {
     return lseen;
 }
 
-void Edges::updateOccurrences(std::pair<int,int> edge) {
+void Edges::updateOccurrences(std::pair<std::string,std::string> edge) {
     this->occurrences[edge]++;
 }
 
-void Edges::updateFrequencies(std::pair<int,int> edge, Link& l) {
+void Edges::updateFrequencies(std::pair<std::string,std::string> edge, Link& l) {
     this->frequencies[edge] += l.e - l.b;
 }
 
 void Edges::printStats() {
-    std::map<std::pair<int,int>, int>::const_iterator occIter;
-    std::map<std::pair<int,int>, int>::const_iterator fIter;
+    std::map<std::pair<std::string,std::string>, int>::const_iterator occIter;
+    std::map<std::pair<std::string,std::string>, int>::const_iterator fIter;
 
     for(occIter=this->occurrences.begin(), fIter = this->frequencies.begin();occIter != this->occurrences.end(); ++occIter, ++fIter) {
         std::cout << "# " << occIter->first.first << " " << occIter->first.second << " " << occIter->second  << " "

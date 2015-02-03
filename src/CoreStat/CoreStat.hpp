@@ -1,5 +1,5 @@
 #include "../LinkStream.hpp"
-
+#include <string>
 
 // static class Frequency {
 //     // Return frequency of a given link
@@ -17,8 +17,8 @@ class Nodes{
     public:
         Nodes(int, int);
         static unsigned long totalNumberOfNodes(LinkStream stream);
-        void updateOccurrences(int, int);
-        void updateFrequencies(int, int, Link&);
+        void updateOccurrences(std::string, std::string);
+        void updateFrequencies(std::string, std::string, Link&);
         void printStats();
 
     //     void printNodesCoreStats();
@@ -28,9 +28,9 @@ class Nodes{
     public:
         int alpha,omega;
     //     std::map<int, std::vector<int> > tic;
-        std::map<int, int> frequencies;
+        std::map<std::string, int> frequencies;
     //     std::map<int, int> duration;
-        std::map<int, int> occurrences;
+        std::map<std::string, int> occurrences;
 
 };
 
@@ -38,8 +38,8 @@ class Edges {
     public:
         Edges(int, int);
         static unsigned long totalNumberOfEdges(LinkStream stream);
-        void updateOccurrences(std::pair<int,int>);
-        void updateFrequencies(std::pair<int,int>, Link&);
+        void updateOccurrences(std::pair<std::string,std::string>);
+        void updateFrequencies(std::pair<std::string,std::string>, Link&);
         int getAndUpdateLastSeen(Link& l);
         void printStats();
         // void updateDuration(std::pair<int,int>);
@@ -50,10 +50,10 @@ class Edges {
     //
     public:
         int alpha, omega;
-        std::map<std::pair<int,int>, int> last_seen;
-        std::map<std::pair<int,int>, int> frequencies;
+        std::map<std::pair<std::string,std::string>, int> last_seen;
+        std::map<std::pair<std::string,std::string>, int> frequencies;
     //     std::map<std::pair<int,int>, int> duration;
-        std::map<std::pair<int,int>, int> occurrences;
+        std::map<std::pair<std::string,std::string>, int> occurrences;
 
 };
 

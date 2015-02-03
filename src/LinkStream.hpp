@@ -15,13 +15,13 @@ class Link {
     public:
         int b;
         int e;
-        int u;
-        int v;
+        std::string u;
+        std::string v;
 
         int prev_time;
 
     public:
-        Link(int, int, int, int);
+        Link(int, int, std::string, std::string);
         void print();
         friend std::ostream& operator<<(std::ostream&, const Link&);
         ~Link();
@@ -44,7 +44,7 @@ class LinkStream {
         int first_time;
         int omega;
         std::deque<Link> stream;
-        std::map<int, std::vector<int> > neighbors;
-        std::map<std::pair<int, int>, int> edges;
+        std::map<std::string, std::vector<int> > neighbors;
+        std::map<std::pair<std::string, std::string>, int> edges;
 };
 #endif

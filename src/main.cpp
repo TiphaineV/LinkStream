@@ -17,7 +17,8 @@ int main(int argc, char** argv) {
     Nodes nStat (alpha, omega);
 
     LinkStream stream(alpha, omega);
-    int b,e,u,v = 0;
+    int b,e = 0;
+    std::string u,v;
 
     // Read stream from stdin
     for(std::string line; std::getline(std::cin, line);) {
@@ -25,7 +26,7 @@ int main(int argc, char** argv) {
         iss >> b >> e >> u >> v;
 
         Link l (b,e,u,v);
-        std::pair<int,int> edge;
+        std::pair<std::string,std::string> edge;
 
         if(u < v){
             edge.first = u;

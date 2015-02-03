@@ -10,7 +10,7 @@ std::ostream& operator<<(std::ostream &os, const Link &link){
     return os;
 }
 
-Link::Link(int _b, int _e, int _u, int _v) {
+Link::Link(int _b, int _e, std::string _u, std::string _v) {
     this->b = _b;
     this->e = _e;
     this->u = _u;
@@ -37,7 +37,7 @@ void LinkStream::append(Link l) {
     this->neighbors[l.u].push_back(l.b);
     this->neighbors[l.v].push_back(l.b);
 
-    this->edges[std::pair<int,int>(l.u, l.v)] += l.e - l.b;
+    this->edges[std::pair<std::string,std::string>(l.u, l.v)] += l.e - l.b;
 
     if(this->stream.size() > 100000)
         this->pop();
@@ -55,7 +55,7 @@ void LinkStream::print() {
 }
 
 void LinkStream::printEdgeStats() {
-    std::map<std::pair<int,int>, int>::const_iterator i;
+    std::map<std::pair<std::string,std::string>, int>::const_iterator i;
     for(i = this->edges.begin(); i != this->edges.end(); i++) {
         std::cout << i->first.first << " " << i->first.second << " " << float(i->second) / (omega - alpha) << std::endl;
     }
